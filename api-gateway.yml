@@ -2,20 +2,10 @@ server:
   port: 8080
 
 spring:
-  eureka:
-    client:
-      register-with-eureka: true
-      fetch-registry: true
-      serviceUrl:
-        defaultZone: http://localhost:8761/eureka
   cloud:
     gateway:
-      # discovery:
-      #   locator:
-      #     enabled: true
-      #     lower-case-service-id: true
       routes:
-        - id: aplicativo_movie-service
+        - id: movie-service
           uri: lb://movie-service
           predicates:
             - Path=/api/movies/**
@@ -25,7 +15,7 @@ spring:
               args:
                 name: moviesService
                 fallbackUri: forward:/fallback/movies
-        - id: aplicativo_catalog-service
+        - id: catalog-service
           uri: lb://catalog-service
           predicates:
             - Path=/api/catalog/**
@@ -35,22 +25,50 @@ spring:
               args:
                 name: catalogService
                 fallbackUri: forward:/fallback/catalog
+        - id: serie-service
+          uri: lb://serie-service
+          predicates:
+            - Path=/api/series/**
+          filters:
+            - StripPrefix=2
+            - name: CircuitBreaker
+              args:
+                name: moviesService
+                fallbackUri: forward:/fallback/movies
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      default-filters:
+        - AddRequestHeader=user-request-header, custom-user-request-header
+        - AddResponseHeader=user-response-header, custom-user-response-header
+        - LogFilter
+        - TokenRelay
 
-queue:
-  movie:
-    name: MovieQueue
+##ESTO SE DESCOMENTA DESPUES
+  ##security:
+    ##oauth2:
+      ##client:
+        ##registration:
+          ##github:
+            ##client-id: 3d6a6fb80f8ac740be52 ESTO CAMBIAR
+            ##client-secret: 6307e390352e8e3314da7ff4425d6324f6418a98 ESTO CAMBIAR
+##ESTO SE DESCOMENTA DESPUES
+##queue:
+  ##movie:
+    ##name: MovieQueue
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: info
-  info:
-    env:
-      enabled: true
-  endpoint:
-    info:
-      enabled: true
+##management:
+  ##endpoints:
+    ##web:
+      ##exposure:
+        ##include: info
+  ##info:
+    ##env:
+      ##enabled: true
+  ##endpoint:
+    ##info:
+      ##enabled: true
 
 info:
   app:
@@ -60,3 +78,14 @@ info:
   svc:
     intanceid: ${eureka.instance.instance-id}
     port: ${server.port}
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
