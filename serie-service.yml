@@ -1,6 +1,11 @@
 server:
   port: 8098
 
+spring:
+  data:
+    mongodb: 
+      uri: mongodb://localhost:27017/serieBack
+
 eureka:
   instance:
     hostname: localhost
@@ -9,10 +14,6 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
-spring:
-  data:
-    mongodb: 
-      uri: mongodb://localhost:27017/finalBack
   
 ##ESTO SE DESCOMENTA DESPUES
   ##rabbitmq:
