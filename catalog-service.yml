@@ -36,12 +36,3 @@ eureka:
   ##endpoint:
     ##info:
       ##enabled: true
-
-info:
-  app:
-    name: ${spring.application.name}
-    version: 1.0.0
-    description: Catalog Microservice
-  svc:
-    intanceid: ${eureka.instance.instance-id}
-    port: ${server.port}
