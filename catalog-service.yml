@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:0}
+  port: 8065
 
 eureka:
   instance:
@@ -10,26 +10,10 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 
 spring:
-  application:
-    name: catalog-service
-  datasource:
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
-    driverClassName: org.h2.Driver
-    username: sa
-    password: sa
-  jpa:
-    open-in-view: false
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-        format_sql: true
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+  data:
+    mongodb: 
+      uri: mongodb://localhost:27017/finalBack
+ 
   rabbitmq:
     username: guest
     password: guest
