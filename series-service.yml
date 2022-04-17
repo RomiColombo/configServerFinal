@@ -26,7 +26,7 @@ eureka:
   ##movie:
     ##name: MovieQueue
 
-##ESTO NO SE PARA QUE ES
+##ESTO NO SE PARA QUE ES, segun manu para actuator
 ##management:
   ##endpoints:
     ##web:
