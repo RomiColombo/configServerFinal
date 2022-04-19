@@ -41,13 +41,13 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
-  security:
-    oauth2:
-      client:
-        registration:
-          github:
-            client-id: eaadd624be0669e8d697
-            client-secret: 35ee8871b0df8604106616cca2af50f18cc8946b
+  ##security:
+    ##oauth2:
+      ##client:
+        ##registration:
+          ##github:
+            ##client-id: eaadd624be0669e8d697
+            ##client-secret: 35ee8871b0df8604106616cca2af50f18cc8946b
 
 ##ESTO SE DESCOMENTA DESPUES
 ##queue:
