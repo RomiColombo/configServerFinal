@@ -28,7 +28,7 @@ eureka:
 
 
 
-##ESTO NO SE PARA QUE ES, segun manu para actuator
+##ESTO NO SE PARA QUE ES
 ##management:
   ##endpoints:
     ##web:
