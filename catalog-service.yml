@@ -5,6 +5,18 @@ spring:
   data:
     mongodb: 
       uri: mongodb://localhost:27017/catalogoBack
+  zipkin:
+    base-url: http://localhost:9411/
+    enabled: true
+  rabbitmq:
+    username: guest
+    password: guest
+    host: localhost
+    port: 5672
+
+queue:
+  catalog:
+    name: catalogQueue
 
 eureka:
   instance:
@@ -14,16 +26,6 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
  
-##ESTO SE DESCOMENTA DESPUES 
-  ##rabbitmq:
-    ##username: guest
-    ##password: guest
-    ##host: localhost
-    ##port: 5672
-##queue:
-  ##movie:
-    ##name: MovieQueue
-
 ##ESTO NO SE DE QUE ES
 ##management:
   ##endpoints:

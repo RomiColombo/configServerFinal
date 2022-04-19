@@ -48,11 +48,10 @@ spring:
           ##github:
             ##client-id: eaadd624be0669e8d697
             ##client-secret: 35ee8871b0df8604106616cca2af50f18cc8946b
+  zipkin:
+    base-url: http://localhost:9411/
+    enabled: true
 
-##ESTO SE DESCOMENTA DESPUES
-##queue:
-  ##movie:
-    ##name: MovieQueue
 
 ##management:
   ##endpoints:
