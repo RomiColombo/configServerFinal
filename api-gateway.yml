@@ -34,20 +34,21 @@ spring:
             ##- name: CircuitBreaker
               ##args:
                 ##name: moviesService
-                ##fallbackUri: forward:/fallback/movies
+                ##fallbackUri: forward:/fallback/movies 
+      default-filters:
+        - OIDCTokenRelay
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: eaadd624be0669e8d697
+            client-secret: 35ee8871b0df8604106616cca2af50f18cc8946b
 
-##ESTO SE DESCOMENTA DESPUES
-  ##security:
-    ##oauth2:
-      ##client:
-        ##registration:
-          ##github:
-            ##client-id: 3d6a6fb80f8ac740be52 ESTO CAMBIAR
-            ##client-secret: 6307e390352e8e3314da7ff4425d6324f6418a98 ESTO CAMBIAR
 ##ESTO SE DESCOMENTA DESPUES
 ##queue:
   ##movie:
