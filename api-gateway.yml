@@ -35,8 +35,8 @@ spring:
               ##args:
                 ##name: moviesService
                 ##fallbackUri: forward:/fallback/movies 
-      default-filters:
-        - OIDCTokenRelay
+      ##default-filters:
+        ##- OIDCTokenRelay
       discovery:
         locator:
           enabled: true
