@@ -26,3 +26,18 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+
+
+##ESTO NO SE PARA QUE ES
+##management:
+  ##endpoints:
+    ##web:
+      ##exposure:
+        ##include: info
+  ##info:
+    ##env:
+      ##enabled: true
+  ##endpoint:
+    ##info:
+      ##enabled: true
