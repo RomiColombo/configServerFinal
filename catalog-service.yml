@@ -13,8 +13,13 @@ spring:
     password: guest
     host: localhost
     port: 5672
+    ##host: rabbit-mq
 
 queue:
+  movie:
+    name: movieQueue
+  series:
+    name: seriesQueue
   catalog:
     name: catalogQueue
 
@@ -26,15 +31,39 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
  
-##ESTO NO SE DE QUE ES
-##management:
-  ##endpoints:
-    ##web:
-      ##exposure:
-        ##include: info
-  ##info:
-    ##env:
-      ##enabled: true
-  ##endpoint:
-    ##info:
-      ##enabled: true
+resilience4j:
+  circuitbreaker:
+    instances:
+      movie:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 15000
+        permittedNumberOfCallsInHalfOpenState: 3
+        registerHealthIndicator: true
+        allowHealthIndicatorToFail: false
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+
+      series:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 15000
+        permittedNumberOfCallsInHalfOpenState: 3
+        registerHealthIndicator: true
+        allowHealthIndicatorToFail: false
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+
+  retry:
+    instances:
+      movies:
+        waitDuration: 1000
+        maxAttempts: 3
+        retryExceptions:
+          - feign.FeignException$InternalServerError
+
+      series:
+        waitDuration: 1000
+        maxAttempts: 3
+        retryExceptions:
+          - feign.FeignException$InternalServerError

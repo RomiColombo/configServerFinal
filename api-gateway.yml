@@ -9,38 +9,27 @@ spring:
           uri: lb://movie-service
           predicates:
             - Path=/movies/**
-          ##filters:
-            ##- StripPrefix=2
-            ##- name: CircuitBreaker
-              ##args:
-                ##name: moviesService
-                ##fallbackUri: forward:/fallback/movies
         - id: catalog-service
           uri: lb://catalog-service
           predicates:
             - Path=/catalog/**
-          ##filters:
-            ##- StripPrefix=2
-            ##- name: CircuitBreaker
-              ##args:
-                ##name: catalogService
-                ##fallbackUri: forward:/fallback/catalog
         - id: series-service
           uri: lb://series-service
           predicates:
             - Path=/series/**
-          ##filters:
-            ##- StripPrefix=2
-            ##- name: CircuitBreaker
-              ##args:
-                ##name: moviesService
-                ##fallbackUri: forward:/fallback/movies 
-      ##default-filters:
-        ##- OIDCTokenRelay
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
+      default-filters:
+        - AddRequestHeader=user-request-header, custom-user-request-header
+        - AddResponseHeader=user-response-header, custom-user-response-header
+        - LogFilter
+  zipkin:
+    base-url: http://localhost:9411/
+    enabled: true
+
+
   ##security:
     ##oauth2:
       ##client:
@@ -48,31 +37,6 @@ spring:
           ##github:
             ##client-id: eaadd624be0669e8d697
             ##client-secret: 35ee8871b0df8604106616cca2af50f18cc8946b
-  zipkin:
-    base-url: http://localhost:9411/
-    enabled: true
-
-
-##management:
-  ##endpoints:
-    ##web:
-      ##exposure:
-        ##include: info
-  ##info:
-    ##env:
-      ##enabled: true
-  ##endpoint:
-    ##info:
-      ##enabled: true
-
-info:
-  app:
-    name: ${spring.application.name}
-    version: 1.0.0
-    description: API Gateway
-  svc:
-    intanceid: ${eureka.instance.instance-id}
-    port: ${server.port}
 
 eureka:
   instance:

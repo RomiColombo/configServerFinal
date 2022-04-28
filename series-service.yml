@@ -13,6 +13,7 @@ spring:
     password: guest
     host: localhost
     port: 5672
+    ##host: rabbit-mq
 
 queue:
   series:
@@ -25,18 +26,3 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-
-
-
-##ESTO NO SE PARA QUE ES, segun manu para actuator
-##management:
-  ##endpoints:
-    ##web:
-      ##exposure:
-        ##include: info
-  ##info:
-    ##env:
-      ##enabled: true
-  ##endpoint:
-    ##info:
-      ##enabled: true
