@@ -4,16 +4,15 @@ server:
 spring:
   data:
     mongodb: 
-      uri: mongodb://localhost:27017/catalogoBack
+      uri: mongodb://catalog-db:27019/catalogoBack
   zipkin:
-    base-url: http://localhost:9411/
+    base-url: http://zipkin:9411/
     enabled: true
   rabbitmq:
     username: guest
     password: guest
-    host: localhost
     port: 5672
-    ##host: rabbit-mq
+    host: rabbitmq
 
 queue:
   movie:
@@ -24,12 +23,9 @@ queue:
     name: catalogQueue
 
 eureka:
-  instance:
-    hostname: localhost
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://registry-service:8761/eureka
  
 resilience4j:
   circuitbreaker:

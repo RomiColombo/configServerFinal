@@ -4,40 +4,21 @@ server:
 spring:
   data:
     mongodb: 
-      uri: mongodb://localhost:27017/serieBack
+      uri: mongodb://series-db:27017/serieBack
   zipkin:
-    base-url: http://localhost:9411/
+    base-url: http://zipkin:9411/
     enabled: true
   rabbitmq:
     username: guest
     password: guest
-    host: localhost
     port: 5672
-    ##host: rabbit-mq
+    host: rabbitmq
 
 queue:
   series:
     name: serieQueue
 
 eureka:
-  instance:
-    hostname: localhost
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
-
-
-
-##ESTO NO SE PARA QUE ES
-##management:
-  ##endpoints:
-    ##web:
-      ##exposure:
-        ##include: info
-  ##info:
-    ##env:
-      ##enabled: true
-  ##endpoint:
-    ##info:
-      ##enabled: true
+      defaultZone: http://registry-service:8761/eureka
