@@ -21,10 +21,10 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
-      default-filters:
-        - AddRequestHeader=user-request-header, custom-user-request-header
-        - AddResponseHeader=user-response-header, custom-user-response-header
-        - LogFilter
+        default-filters:
+          - AddRequestHeader=user-request-header, custom-user-request-header
+          - AddResponseHeader=user-response-header, custom-user-response-header
+          - LogFilter
   zipkin:
     base-url: http://zipkin:9411/
     enabled: true
